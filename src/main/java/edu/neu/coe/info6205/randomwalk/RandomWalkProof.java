@@ -1,13 +1,8 @@
-/*
- * Copyright (c) 2017. Phasmid Software
- */
-
 package edu.neu.coe.info6205.randomwalk;
 
 import java.util.Random;
 
-public class RandomWalk {
-
+public class RandomWalkProof {
     private int x = 0;
     private int y = 0;
 
@@ -31,7 +26,7 @@ public class RandomWalk {
      */
     private void randomWalk(int m) {
         for(int i = 0; i < m; i++){
-           randomMove();
+            randomMove();
         }
     }
 
@@ -46,12 +41,12 @@ public class RandomWalk {
     }
 
     /**
-     * Method to compute the distance from the origin (the lamp-post where the drunkard starts) to his current position.
+     * Method to compute the sqrt of distance from the origin (the lamp-post where the drunkard starts) to his current position.
      *
-     * @return the (Euclidean) distance from the origin to the current position.
+     * @return the sqrt of (Euclidean) distance from the origin to the current position.
      */
-    public double distance() {
-        return Math.sqrt(x * x + y * y);
+    public double distanceSqrt() {
+        return x * x + y * y;
     }
 
     /**
@@ -64,24 +59,22 @@ public class RandomWalk {
     public static double randomWalkMulti(int m, int n) {
         double totalDistance = 0;
         for (int i = 0; i < n; i++) {
-            RandomWalk walk = new RandomWalk();
+            RandomWalkProof walk = new RandomWalkProof();
             walk.randomWalk(m);
-            totalDistance = totalDistance + walk.distance();
+            totalDistance = totalDistance + walk.distanceSqrt();
         }
         return totalDistance / n;
     }
 
     public static void main(String[] args) {
-        double distance = 0;
         int m;
-        int n = 20;
-        for(int i = 0; i < 6; i++) {
-            m = (int) (Math.random() * 10);
-            distance += randomWalkMulti(m, n);
-            System.out.println(m + " steps: " + n + " experiments");
+        int n = 500;
+        double meanDistance = 0;
+        for(int i = 1; i <= 20; i++){
+            m = i;
+            meanDistance = randomWalkMulti(m, n);
+            System.out.println(m + "steps: mean value of sqrt of distance = " + meanDistance );
         }
-        double meanDistance = distance/6;
-        System.out.println( meanDistance + " over " + 6 * n + " experiments");
     }
 
 }
