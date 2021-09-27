@@ -4,6 +4,9 @@
 
 package edu.neu.coe.info6205.util;
 
+import edu.neu.coe.info6205.sort.elementary.InsertionSort;
+
+import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -125,4 +128,40 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
     private final Consumer<T> fPost;
 
     final static LazyLogger logger = new LazyLogger(Benchmark_Timer.class);
+
+    public static void main(String args[]){
+        int n = 5000;
+        int times = 40;
+        Benchmark_Timer<Boolean> benchmarkTimer = new Benchmark_Timer<>(
+                "InsertionSort",
+                aBoolean -> {
+                });
+        System.out.printf("n = %d \n" + "Ordered Array = " + benchmarkTimer.generateRandomArray(times ,n), n);
+        System.out.printf("n = %d \n" + "Ordered Array = " + benchmarkTimer.generateOrderedArray(times ,n), n);
+        System.out.printf("n = %d \n" + "Ordered Array = " + benchmarkTimer.generateReverseOrderedArray(times ,n), n);
+        System.out.printf("n = %d \n" + "Ordered Array = " + benchmarkTimer.generatePartiallyOrderedArray(times ,n), n);
+    }
+
+    //1.Random Array
+    private double generateRandomArray(int runTimes, int n){
+
+    }
+
+
+    //2.Ordered Array
+    private double generateOrderedArray(int runTimes, int n){
+
+    }
+
+
+    //3.Reverse-ordered Array
+    private double generateReverseOrderedArray(int runTimes, int n){
+
+    }
+
+
+    //4.Partially-ordered Array
+    private double generatePartiallyOrderedArray(int runTimes, int n){
+
+    }
 }
