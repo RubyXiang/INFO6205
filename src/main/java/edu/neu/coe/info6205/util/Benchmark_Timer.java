@@ -129,7 +129,7 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
 
     final static LazyLogger logger = new LazyLogger(Benchmark_Timer.class);
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         int n = 5000;
         int times = 40;
         Benchmark_Timer<Boolean> benchmarkTimer = new Benchmark_Timer<>(
@@ -144,24 +144,24 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
 
     //1.Random Array
     private double generateRandomArray(int runTimes, int n){
-
+        return 0;
     }
-
 
     //2.Ordered Array
     private double generateOrderedArray(int runTimes, int n){
-
+        return 0;
     }
+
 
 
     //3.Reverse-ordered Array
     private double generateReverseOrderedArray(int runTimes, int n){
-
+        return 0;
     }
 
 
     //4.Partially-ordered Array
     private double generatePartiallyOrderedArray(int runTimes, int n){
-
+        return 0;
     }
 }
