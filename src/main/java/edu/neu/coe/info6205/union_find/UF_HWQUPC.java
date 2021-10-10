@@ -233,11 +233,11 @@ public class UF_HWQUPC implements UF {
         int num = 100;
         while(num <= 2000){
             int s = 0;
-            for(int i = 0; i < 20; i++){
+            for(int i = 0; i < 200; i++){
                 int cnt = count(num, true);
                 s = s + cnt;
             }
-            System.out.println("The average connections number for " + num + " is " + s/20);
+            System.out.println("The average connections number for " + num + " is " + s/200);
             num += 100;
         }
 
