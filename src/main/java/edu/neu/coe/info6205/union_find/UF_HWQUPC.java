@@ -8,6 +8,8 @@
 package edu.neu.coe.info6205.union_find;
 
 import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Height-weighted Quick Union with Path Compression
@@ -187,5 +189,55 @@ public class UF_HWQUPC implements UF {
      */
     private void doPathCompression(int i) {
         updateParent(i, parent[parent[i]]);
+    }
+
+    /**
+     * a static method count() that takes n as the argument and returns the number of connections
+     */
+    public static int count(int n, boolean doPathCompression){
+        UF_HWQUPC uf = new UF_HWQUPC(n, doPathCompression);
+        Random random = new Random();
+        boolean connect = false;
+        int cnt = 0;
+        boolean get[] = new boolean[n];
+        for(int i = 0; i < n; i++){
+            get[i] = false;
+        }
+        while(!connect) {
+            int p = random.nextInt(n);
+            int q = random.nextInt(n);
+            cnt++;
+            if (!uf.connected(p, q)) {
+                uf.union(p, q);
+            }
+            get[p] = get[q] = true;
+            for(int i = 0; i < n; i++){
+                if(!get[i]){
+                    break;
+                }
+                if(i == n-1 && get[n-1]){
+                    connect = true;
+                    continue;
+                }
+            }
+        }
+        return cnt;
+    }
+
+
+    /**
+     * a main() that takes n from the command line, calls count() and prints the returned value
+     */
+    public static void main(String args[]){
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int sum = 0;
+        for(int i = 0; i < 200; i++){
+            int cnt = count(n, true);
+            System.out.println("The connections number is " + cnt);
+            sum = sum + cnt;
+        }
+        System.out.println("The average connections number is " + sum/200);
+
     }
 }
