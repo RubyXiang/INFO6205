@@ -229,6 +229,19 @@ public class UF_HWQUPC implements UF {
      * a main() that takes n from the command line, calls count() and prints the returned value
      */
     public static void main(String args[]){
+        // for part 3
+        int num = 100;
+        while(num <= 2000){
+            int s = 0;
+            for(int i = 0; i < 20; i++){
+                int cnt = count(num, true);
+                s = s + cnt;
+            }
+            System.out.println("The average connections number for " + num + " is " + s/20);
+            num += 100;
+        }
+
+        // You can input any integer as n in command line and get the output of number of connections
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int sum = 0;
@@ -238,6 +251,5 @@ public class UF_HWQUPC implements UF {
             sum = sum + cnt;
         }
         System.out.println("The average connections number is " + sum/200);
-
     }
 }
