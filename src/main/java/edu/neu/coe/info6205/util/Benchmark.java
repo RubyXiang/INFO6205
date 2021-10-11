@@ -15,7 +15,7 @@ public interface Benchmark<T> {
      * @param m the number of times the function f will be called.
      * @return the average number of milliseconds taken for each run of function f.
      */
-    default double run(T t, int m) {
+    default double  run(T t, int m) {
         return runFromSupplier(() -> t, m);
     }
 

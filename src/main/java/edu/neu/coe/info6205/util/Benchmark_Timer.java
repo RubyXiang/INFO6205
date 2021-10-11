@@ -130,38 +130,79 @@ public class Benchmark_Timer<T> implements Benchmark<T> {
     final static LazyLogger logger = new LazyLogger(Benchmark_Timer.class);
 
     public static void main(String[] args){
-        int n = 5000;
+        int n = 20000;
         int times = 40;
         Benchmark_Timer<Boolean> benchmarkTimer = new Benchmark_Timer<>(
                 "InsertionSort",
                 aBoolean -> {
                 });
-        System.out.printf("n = %d \n" + "Ordered Array = " + benchmarkTimer.generateRandomArray(times ,n), n);
-        System.out.printf("n = %d \n" + "Ordered Array = " + benchmarkTimer.generateOrderedArray(times ,n), n);
-        System.out.printf("n = %d \n" + "Ordered Array = " + benchmarkTimer.generateReverseOrderedArray(times ,n), n);
-        System.out.printf("n = %d \n" + "Ordered Array = " + benchmarkTimer.generatePartiallyOrderedArray(times ,n), n);
+        System.out.printf("n = %d \n" + "random array = " + benchmarkTimer.generateRandomArray(times ,n) + "\n", n);
+        System.out.printf("n = %d \n" + "Ordered array = " + benchmarkTimer.generateOrderedArray(times ,n) + "\n", n);
+        System.out.printf("n = %d \n" + "reverse ordered array = " + benchmarkTimer.generateReverseOrderedArray(times ,n) + "\n", n);
+        System.out.printf("n = %d \n" + "partially ordered array = " + benchmarkTimer.generatePartiallyOrderedArray(times ,n) + "\n", n);
     }
 
-    //1.Random Array
+    //1. Random Array
     private double generateRandomArray(int runTimes, int n){
-        return 0;
+        Integer[] array = new Integer[n];
+        Random random = new Random();
+        for(int i = 0 ; i < n; i++){
+            array[i] = random.nextInt(n);
+        }
+        Benchmark<Boolean> benchmark = new Benchmark_Timer<>(
+                "testInsertionTimer", null,
+                b -> new InsertionSort<Integer>().sort(array,0, array.length),
+                null
+        );
+        return benchmark.run(true, runTimes);
     }
 
     //2.Ordered Array
     private double generateOrderedArray(int runTimes, int n){
-        return 0;
+        Integer[] array = new Integer[n];
+        for(int i = 0; i < n; i++){
+            array[i] = i;
+        }
+        Benchmark<Boolean> benchmark = new Benchmark_Timer<>(
+                "testInsertionTimer", null,
+                b-> new InsertionSort<Integer>().sort(array,0, array.length),
+                null
+        );
+        return benchmark.run(true, runTimes);
     }
 
 
 
     //3.Reverse-ordered Array
     private double generateReverseOrderedArray(int runTimes, int n){
-        return 0;
+        Integer[] array = new Integer[n];
+        for(int i = n; i >0; i--){
+            array[n-i] = i;
+        }
+        Benchmark<Boolean> benchmark = new Benchmark_Timer<>(
+                "testInsertionTimer", null,
+                b-> new InsertionSort<Integer>().sort(array,0, array.length),
+                null
+        );
+        return benchmark.run(true, runTimes);
     }
 
 
     //4.Partially-ordered Array
     private double generatePartiallyOrderedArray(int runTimes, int n){
-        return 0;
+        Integer[] array = new Integer[n];
+        Random random = new Random();
+        for(int i = 0; i < n/2; i++){
+            array[i] = random.nextInt(n/2);
+        }
+        for(int i = n/2; i < n; i++){
+            array[i] = i;
+        }
+        Benchmark<Boolean> benchmark = new Benchmark_Timer<>(
+                "testInsertionTimer", null,
+                b-> new InsertionSort<Integer>().sort(array,0, array.length),
+                null
+        );
+        return benchmark.run(true, runTimes);
     }
 }
